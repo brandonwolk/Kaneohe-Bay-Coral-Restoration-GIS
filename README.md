@@ -7,24 +7,23 @@ Welcome to the GitHub repository for my Master’s capstone thesis at the Univer
 The analysis is split into four modular, sequential Jupyter notebooks designed to run in Google Colab or a local Jupyter environment:
 
 1. **`01_Data_Ingestion_and_Preprocessing.ipynb`**
-   * Processes raw 4-meter NOAA/SOEST LiDAR and multibeam bathymetry (`EPSG:6634`).
-   * Clips NOAA NCCOS benthic habitat vector surveys to the Kāneʻohe Bay study domain (7,735.31 ha).
-   * Automates data harvesting for NOAA Coral Reef Watch v3.1 5-km SST/DHW grids (Aug–Oct peak bleaching window) and PacIOOS/USGS coastal water quality records.
+   * Processes raw 4-meter NOAA/SOEST bathymetric LiDAR (`kaneohe_MB_Lidar_4m.asc` $\rightarrow$ `Kaneohe_Bathy_Final.tif`, `EPSG:6634`, `3853 × 3531` grid).
+   * Clips and projects NOAA NCCOS benthic habitat vector surveys (`Kaneohe_Benthic.shp`) to the Kāneʻohe Bay study domain (`7,735.31 ha`).
+   * Harvests multi-decade NOAA Coral Reef Watch v3.1 5-km SST and DHW NetCDF archives (2000–2025) and PacIOOS Clean Water Branch (CWB) water quality records.
 
 2. **`02_MCDA_Spatial_Modeling.ipynb`**
-   * Establishes the 4-meter master spatial grid lock.
-   * Executes Euclidean distance-transform (`scipy.ndimage`) exponential distance-decay modeling to interpolate storm-event salinity (5th percentile) and turbidity (95th percentile) plumes from stream mouths.
-   * Implements physiological min–max normalization (0.00–1.00) and Analytic Hierarchy Process (AHP) weighted Multi-Criteria Decision Analysis (MCDA; $\text{CR} = 0.0026$: Biological 54%, Physical 30%, Chemical 16%).
+   * Establishes the 4-meter master spatial grid lock from bathymetry (`5,159,407` valid marine pixels).
+   * Filters PacIOOS CWB monitoring records (`n = 1,077` observations across 8 bay stations) to extract 5th-percentile storm salinity minima and 95th-percentile turbidity maxima, interpolating continuous 4-meter rasters via `scipy.spatial.cKDTree` Inverse Distance Weighting (IDW) and `scipy.ndimage.distance_transform_edt` runoff decay modeling.
+   * Implements continuous min–max physiological normalization (`0.00–1.00`) and Analytic Hierarchy Process (AHP) weighted Multi-Criteria Decision Analysis (MCDA; $\text{CR} = 0.0026$: Biological 54%, Physical 30%, Chemical 16%).
 
 3. **`03_Climate_Projections_and_Delta_Correction.ipynb`**
-   * Interfaces with downscaled CMIP6 climate projections (`MIROC6` global climate model).
-   * Computes peak summer SST and cumulative DHW projections for mid-century (2025–2050) under the intermediate emissions pathway (`SSP2-4.5`).
-   * Evaluates pixel-wise Limiting Factor Analysis and allocates viable habitats ($\text{RSI} \ge 0.60$) into Master Intervention Codes 1–4.
+   * Interfaces directly with the Pangeo CMIP6 cloud catalog (`intake-esm`) to retrieve `MIROC6` (`r1i1p1f1`) ocean temperature (`tos`) projections (2025–2050) under `SSP2-4.5` and `SSP5-8.5`.
+   * Computes historical SST delta bias-correction residuals (`SST_Bias_Correction_Residual.tif`) and projects mid-century peak DHW grids (`kaneohe_bay_MIROC6_DHW_SSP245_2025_2050.tif`).
+   * Generates pixel-wise Limiting Factor Analysis rasters (`Limiting_Factor_Historical.tif`, `Limiting_Factor_Predictive.tif`) and Master Intervention transition grids (`Codes 1–4`, $\text{RSI} \ge 0.60$).
 
 4. **`04_Statistical_Validation_and_Figures.ipynb`**
-   * Runs Pearson's Chi-Square ($\chi^2$) contingency tests and pairwise Odds Ratios ($\text{OR}$) comparing mid-century persistence across benthic cover classes and patchy versus dense coral frameworks.
-   * Cross-tabulates persistent 2050 refugia across geomorphic zones.
-   * Generates publication-grade figures for the manuscript and poster.
+   * Runs Pearson's Chi-Square ($\chi^2$) contingency tests (`scipy.stats.chi2_contingency`) and pairwise Odds Ratios ($\text{OR}$) comparing mid-century persistence across benthic cover classes ($N = 1,240,469$) and patchy versus dense coral frameworks ($N = 179,481$; $\text{OR} = 1.73, p < 0.001$).
+   * Cross-tabulates persistent 2050 refugia across geomorphic zones and generates publication-grade figures.
 
 ## Software Architecture & Spatial Standards
 - **Spatial Reference System:** NAD83(PA11) / UTM Zone 4N (`EPSG:6634`)
@@ -32,7 +31,7 @@ The analysis is split into four modular, sequential Jupyter notebooks designed t
 - **Environment:** Python 3.10 with `xarray`, `rioxarray`, `rasterio`, `geopandas`, `numpy`, and `scipy`; ArcGIS Pro (Raster Calculator, Reclassify, Tabulate Area).
 
 ## Data Availability
-Due to file size limits, large raster GeoTIFF outputs (`.tif`) and NetCDF climate arrays are archived locally in Google Drive. To execute these notebooks, ensure your directory structure mirrors the script paths or connect a mounted Google Drive workspace containing your processed raster folders.
+Due to file size limits, large raster GeoTIFF outputs (`.tif`) and NetCDF climate arrays are archived in Google Drive (`/Capstone/01 Raw Data` through `06 Advanced Diagnostic & Delta Outputs`). To execute these notebooks, mount your Google Drive workspace matching the directory paths in Module 1–4.
 
 ---
 
