@@ -1,4 +1,4 @@
-# Kāneʻohe Bay Coral Restoration: Spatial Optimization & Climate Modeling
+# Spatial Optimization of Coral Restoration Interventions Under Mid-Century Climate Projections in Kāneʻohe Bay
 
 Welcome to the GitHub repository for my Master’s capstone thesis at the University of Pennsylvania. This repository houses the reproducible Python and spatial analysis pipeline used to model climate vulnerability, evaluate environmental bottlenecks, and optimize coral restoration strategies across Kāneʻohe Bay, Hawaiʻi.
 
