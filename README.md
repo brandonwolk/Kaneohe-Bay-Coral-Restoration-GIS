@@ -4,6 +4,20 @@ Welcome to the GitHub repository for my Master’s capstone thesis at the Univer
 
 ## Repository Overview
 
+## Python vs. ArcGIS Pro Workflow
+
+To ensure transparent and reproducible GIS modeling, the geoprocessing tasks are intentionally split between custom Python scripts and ArcGIS Pro spatial analytics:
+
+* **Python (Preprocessing & Normalization):**
+  * Handles raw data ingestion, raster clipping, and spatial grid-locking (`EPSG:6634`, 4-m resolution).
+  * Executes `scipy.spatial.cKDTree` IDW interpolation for nearshore water quality stations ($n = 1,077$).
+  * Applies continuous min–max physiological normalization ($0.00–1.00$) across all individual environmental proxy layers.
+
+* **ArcGIS Pro (MCDA Overlay & Spatial Allocation):**
+  * **Raster Calculator:** Executes Weighted Linear Combination (WLC) using AHP weights ($\text{CR} = 0.0026$: Biological 54%, Physical 30%, Chemical 16%) to produce the continuous Restoration Suitability Index ($\text{RSI}$).
+  * **Reclassify & Conditional Map Algebra (`Con`):** Enforces the active viability threshold ($\text{RSI} \ge 0.60$), extracts pixel-wise Limiting Factors, and allocates viable habitats into Master Intervention Codes 1–4.
+  * **Tabulate Area:** Extracts exact spatial footprints and hectare changes across geomorphic zones and benthic cover classes.
+
 The analysis is split into four modular, sequential Jupyter notebooks designed to run in Google Colab or a local Jupyter environment:
 
 1. **`01_Data_Ingestion_and_Preprocessing.ipynb`**
