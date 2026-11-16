@@ -48,13 +48,13 @@ By evaluating biological thermal limits, physical seafloor structure, and chemic
   By 2050, thermal stress overtakes physical depth as the primary limiting constraint across 97.0% of Kāneʻohe Bay. Viable space for active, in-water restoration (Codes 1–3) contracts by 70.6% down to 752.90 ha. Passive Protection and Watershed Management (Code 4) expands to cover 6,982.40 ha (90.3% of the bay), underscoring the critical need to reduce land-based sediment runoff to protect the native lagoon corals that serve as the bay's genetic donor bank.
 
 * **Targeting Active Restoration to Micro-Scale Habitats (Codes 1–3):**
-  The 752.90 ha of surviving active restoration space does not occur randomly; it strongly aligns with specific geomorphic features:
-  * **Assisted Gene Flow (Code 1):** 89.9% (502.69 ha) of optimal space for Assisted Gene Flow and larval seeding is concentrated along the wave-flushed Barrier Reef complex (Back Reef, Reef Flat, Reef Crest).
+  The 752.90 ha of surviving active restoration space aligns with specific geomorphic features:
+  * **Assisted Gene Flow (Code 1):** 89.9% (502.69 ha) of optimal space for Assisted Gene Flow and larval seeding is concentrated along the wave-flushed Barrier Reef complex.
   * **Substrate Engineering (Code 2):** 68.3% (99.19 ha) of optimal space for 3D printed stabilization modules is located inside deep Tidal Channels and lagoon margins where water exchange buffers 2050 heat.
   * **Algae Remediation (Code 3):** 94.8% (45.84 ha) of optimal space for native urchin biocontrol and anti-fouling coatings is located on outer Lagoon patch reefs and the Back Reef, specifically defending 27.03 ha of surviving lagoon corals from algal smothering.
 
-* **Coral Architecture Associations:**
-  Spatially, patchy coral mosaics (10% to <50% cover) demonstrate 1.73 times higher odds of remaining viable through 2050 than dense coral frameworks (≥50% cover). Even when controlling for geomorphic zones, patchy coral outlasts dense coral within both the wave-swept Back Reef (OR = 4.19) and the Reef Flat (OR = 1.70), suggesting future outplants should mimic moderate, patchy configurations.
+* **Coral Architecture Associations & Resolving Simpson's Paradox:**
+  While a naive bay-wide aggregation suggests dense coral survives at higher rates, this is a statistical artifact (Simpson’s Paradox) driven by the complete 2050 viability loss across the offshore Bank/Shelf, which is almost exclusively colonized by patchy coral (507,419 pixels). When employing a Mantel-Haenszel Odds Ratio to adjust for geomorphic zone distribution, patchy coral (10% to <50% cover) actually exhibits 1.95 times higher odds of remaining viable through mid-century warming compared to dense coral frameworks (≥50% cover).
 
 ---
 
